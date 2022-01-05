@@ -89,7 +89,7 @@ intalalamos plugin de css y sass
     npm i mini-css-extract-plugin css-loader style-loader sass sass-loader -D
     En webpack agregamos el pugin que acabamos de instalar
         parte superior 
-            const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+            const MiniCssExtractPlugin = require('mini-css-extract-plugin') //traemos el plugin de css sass
         en modules.rules 
             {
                 test: /\.(css|scss)$/,
@@ -114,3 +114,19 @@ intalalamos plugin de css y sass
         }
 Ahora en assets/css creamos un archivo de estilos
     global.scss
+        $basecolor: #000;
+        $color: #962020;
+        body {
+            background-color: $basecolor;
+            color: $color;
+        }
+    
+    lo importamos en App.jsx 
+        import '../assets/css/global.scss'
+
+Para usar asyn y awaiy con babel instalar 
+    npm install @babel/plugin-transform-runtime
+    en el archivo .babelrc 
+        "plugins": [
+            "@babel/plugin-transform-runtime"
+        ]
