@@ -1,0 +1,116 @@
+git init
+npm init 
+npm install react react-dom
+
+Estructura de carpetas y archivos
+    - public
+        * index.html
+    - src
+        * assets
+            + css
+            + js 
+            + media
+            + tipografia
+        * containers
+        * components
+        * page
+        * routes
+            + App.jsx
+        index.js
+
+Instalación de Babel, Webpack y HTML plugin
+    npm install babel-loader @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli webpack-dev-server html-loader html-webpack-plugin
+
+crear archivo .gitignore
+crear archivo .babelrc
+{
+    "presets": [
+        "@babel/preset-env",
+        "@babel/preset-react"
+    ]
+}
+
+
+crear archivo webpack.config.js
+############################################################################ contenido del webpack
+const path = require('path'); //path del proyecto principal
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //traemos el plugin de html
+
+module.exports = {
+    entry: './src/index.js', // punto de entrada
+    output: { // lugar al que saldrán todos los archivos
+        path: path.resolve(__dirname, 'dist'), //en nuestro path, crea la carpeta dist
+        filename: 'bundle.js' // nombre del archivo js resultante
+    },
+    mode: "development",
+    resolve: { // extensión de archivos a tomar en cuenta
+        extensions: ['.js', '.jsx']
+    },
+    module: { // loaders para cada tipo de archivo
+        rules: [ // reglas para usar
+            {
+                test: /\.(js|jsx)$/, // extensiones en las cuales actuará babel
+                exclude: /node_modules/, // siempre excluir node modules 
+                use: { // indicamos el loader
+                    loader: 'babel-loader' // babel 
+                }
+            },
+            {
+                test: /\.html$/, // extensiones html
+                use: [
+                    {
+                        loader: 'html-loader' // loader a usar
+                    }
+                ]
+            }
+        ]
+    },
+    plugins: [ // plugins 
+        new HtmlWebpackPlugin({ // instanciamos el plugin para html 
+            template: './public/index.html', // archivo raíz a transformar
+            filename: './index.html' // el archivo resultante
+        })
+    ]
+}
+############################################################################ 
+
+en el archivo package.json
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open",
+    "build": "webpack --mode production"
+},
+
+###################
+    npm run start o npm start
+###################
+
+intalalamos plugin de css y sass
+    npm i mini-css-extract-plugin css-loader style-loader sass sass-loader -D
+    En webpack agregamos el pugin que acabamos de instalar
+        parte superior 
+            const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+        en modules.rules 
+            {
+                test: /\.(css|scss)$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader"
+                ]
+            },
+        en Plugins
+            new MiniCssExtractPlugin({
+                filename: '[name].css'
+            })
+        como nuevo objeto 
+        devServer: {
+            static: {
+                directory: path.join(__dirname, 'dist'),
+            },
+            compress: true,
+            port: 3000,
+            historyApiFallback: true,
+        }
+Ahora en assets/css creamos un archivo de estilos
+    global.scss
