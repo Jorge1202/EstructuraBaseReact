@@ -124,7 +124,7 @@ Ahora en assets/css creamos un archivo de estilos
     lo importamos en App.jsx 
         import '../assets/css/global.scss'
 
-Para usar asyn y awaiy con babel instalar 
+Para usar async y await con babel instalar 
     npm install @babel/plugin-transform-runtime
     en el archivo .babelrc 
         "plugins": [
