@@ -1,6 +1,7 @@
 git init
 npm init 
-npm install react react-dom
+npm install react react-dom 
+npm install react-router-dom
 
 Estructura de carpetas y archivos
     - public
@@ -130,3 +131,24 @@ Para usar async y await con babel instalar
         "plugins": [
             "@babel/plugin-transform-runtime"
         ]
+
+Para usar e importar imagenes instalar
+    npm install --save-dev file-loader
+    en archivo webpack agregar en rules
+    {
+        test: /\.(jpe?g|png|gif|svg|mp4)$/i,
+        type: 'asset',
+        use: [
+            {
+                loader: 'file-loader',
+            },
+        ],
+    }, 
+
+Para encriptar la ruta de las imagenes 
+agregar en  WEBPACK objeto resolve
+    alias:{
+        '@img': path.resolve(__dirname, 'src/assets/media/img/'),
+    }
+    Nota: cada alias redirige a una ruta al importar en el archivo hacerlo de la siguiente manera
+    import error from'@img/error-404.jpg' //la imagen se encuentra en "src/assets/media/img/error-404.jpg"
