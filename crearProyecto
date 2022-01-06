@@ -145,7 +145,7 @@ Para usar e importar imagenes instalar
         ],
     }, 
 
-Para encriptar la ruta de las imagenes 
+Para encriptar la ruta de los archivos
 agregar en  WEBPACK objeto resolve
     alias:{
         '@img': path.resolve(__dirname, 'src/assets/media/img/'),
