@@ -3,21 +3,45 @@ npm init
 npm install react react-dom 
 npm install react-router-dom
 
-Estructura de carpetas y archivos
+Estructura de carpetas y archivos a crear antes de seguir instalando
     - public
         * index.html
     - src
         * assets
             + css
+                -global.scss
             + js 
             + media
             + tipografia
-        * containers
         * components
+        * containers
         * page
         * routes
             + App.jsx
         index.js
+
+
+incluir en index.js
+############################################################################ contenido del index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './routes/App'
+ReactDOM.render(<App/>, document.getElementById("app"));
+############################################################################ contenido del index.js
+############################################################################ contenido del App.jsx
+import React from 'react';
+
+const App = () => {
+    return (
+        <div>
+            Esto es una prueba 2
+        </div>
+    );
+};
+
+export default App;
+############################################################################ contenido del App.jsx
+
 
 Instalación de Babel, Webpack y HTML plugin
     npm install babel-loader @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli webpack-dev-server html-loader html-webpack-plugin
@@ -63,7 +87,7 @@ module.exports = {
                         loader: 'html-loader' // loader a usar
                     }
                 ]
-            }
+            },
         ]
     },
     plugins: [ // plugins 
@@ -104,7 +128,7 @@ intalalamos plugin de css y sass
             new MiniCssExtractPlugin({
                 filename: '[name].css'
             })
-        como nuevo objeto 
+        como nuevo objeto después de Plugins
         devServer: {
             static: {
                 directory: path.join(__dirname, 'dist'),
@@ -135,14 +159,9 @@ Para usar async y await con babel instalar
 Para usar e importar imagenes instalar
     npm install --save-dev file-loader
     en archivo webpack agregar en rules
-    {
+   {
         test: /\.(jpe?g|png|gif|svg|mp4)$/i,
         type: 'asset',
-        use: [
-            {
-                loader: 'file-loader',
-            },
-        ],
     }, 
 
 Para encriptar la ruta de los archivos
@@ -151,4 +170,16 @@ agregar en  WEBPACK objeto resolve
         '@img': path.resolve(__dirname, 'src/assets/media/img/'),
     }
     Nota: cada alias redirige a una ruta al importar en el archivo hacerlo de la siguiente manera
-    import error from'@img/error-404.jpg' //la imagen se encuentra en "src/assets/media/img/error-404.jpg"
+    import Imagen from '@img/nombreimagen.jpg' //la imagen se encuentra en "src/assets/media/img/nombreimagen.jpg"
+
+
+Extras
+    instalar bootstrap 
+        npm install --save bootstrap
+        para importar bootstrap en App.jsx agregamos 
+            import 'bootstrap/dist/css/bootstrap.min.css';
+
+    instalar iconos de bootstrap 
+        npm i bootstrap-icons
+        para importar bootstrap-icons en App.jsx agregamos 
+            import 'bootstrap-icons/font/bootstrap-icons.css';
